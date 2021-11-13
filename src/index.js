@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { BASE_URL, KEY } from './api';
 
 // These imports won't work until you fix ./components/index.js
 import {
@@ -38,3 +39,7 @@ const App = () => {
  * Boostrap the <App /> component into the '#app' element in the DOM,
  * using ReactDOM.render();
  */
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
