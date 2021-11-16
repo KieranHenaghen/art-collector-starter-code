@@ -6,7 +6,7 @@ import React from 'react';
  */
 import { fetchQueryResultsFromURL } from '../api';
 
-const Preview = (props) => {
+const Preview = ({ setSearchResults, setFeaturedResult, setIsLoading, searchResults }) => {
   /**
    * Destructure setSearchResults, setFeaturedResult, and setIsLoading from props
    * and also destructure info and records from props.searchResults
@@ -39,12 +39,12 @@ const Preview = (props) => {
       <button 
         disabled={} 
         className="previous"
-        onClick={}>Previous</button>
+        onClick={fetchPage(info.prev)}>Previous</button>
       {/* This button should be disabled if nothing is set in info.next, and should call fetchPage with info.next when clicked */}
       <button
         disabled={}
         className="next"
-        onClick={}>Next</button>
+        onClick={fetchPage(info.next)}>Next</button>
     </header>
     <section className="results">
       {
