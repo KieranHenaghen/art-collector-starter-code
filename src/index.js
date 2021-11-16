@@ -6,7 +6,7 @@ import { BASE_URL, KEY } from './api';
 import {
   // Feature,
   Loading,
-  Preview,
+  // Preview,
   Search,
   Title
 } from './components';
@@ -37,7 +37,7 @@ const App = () => {
     <Search setIsLoading={setIsLoading} setSearchResults={setSearchResults} />
     
     {/* <Preview /> needs props for searchResults, setIsLoading and setSearchResults (clicking prev/next buttons), and setFeaturedResult (clicking a preview) */}
-    <Preview searchResults={searchResults} setIsLoading={setIsLoading} setSearchResults={setSearchResults} setFeaturedResult={setFeaturedResult} />
+    {/* <Preview searchResults={searchResults} setIsLoading={setIsLoading} setSearchResults={setSearchResults} setFeaturedResult={setFeaturedResult} /> */}
     
     {/* <Feature /> needs props for featuredResult, as well as setIsLoading and setSearchResults (clicking on searchable properties) */}
     {/* <Feature featuredResult={featuredResult} setIsLoading={setIsLoading} setSearchResults={setSearchResults} /> */}

@@ -1,4 +1,6 @@
-// import React, { Fragment } from 'react';
+import React, { Fragment } from 'react';
+
+import { fetchQueryResultsFromTermAndValue } from "../api";
 
 // // Don't touch this import
 // import { fetchQueryResultsFromTermAndValue } from '../api';
@@ -29,9 +31,28 @@
 //  * finally:
 //  *  - call setIsLoading, set it to false
 //  */
-// const Searchable = (props) => {
-  
-// }
+const Searchable = (props) => {
+  const { searchTerm, searchValue, setIsLoading, setSearchResults } = props;
+
+  <span className="content">
+      <a href="#" onClick={async (event) => {
+          event.preventDefault();
+          setIsLoading() = true;
+          try {
+              const result = await fetchQueryResultsFromTermAndValue(searchTerm, searchValue);
+              setSearchResults() = result;
+          }
+          catch (error) {
+              console.error(error.message);
+          }
+          finally {
+              setIsLoading() = false;
+          }
+      }}>
+          SOME SEARCH TERM
+      </a>
+  </span>
+}
 
 // /**
 //  * We need a new component called Feature which looks like this when no featuredResult is passed in as a prop:
@@ -67,8 +88,10 @@
 //  * 
 //  * This component should be exported as default.
 //  */
-// const Feature = (props) => {
+const Feature = (props) => {
+    const { featuredResult } = props;
+    const { title, dated, images, primaryimageurl, description, culture, style, technique, medium, dimensions, people, department, division, contact, creditline } 
 
-// }
+}
 
-// export default Feature;
+export default Feature;

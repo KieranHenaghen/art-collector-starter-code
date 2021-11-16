@@ -9,9 +9,10 @@ import {
   fetchQueryResults
 } from '../api';
 
-const Search = ({ setIsLoading, setSearchResults }) => {
+const Search = (props) => {
   // Make sure to destructure setIsLoading and setSearchResults from the props
-
+  
+  const { setIsLoading, setSearchResults } = props;
 
   /**
    * We are at the Search component, a child of app. This has a form, so we need to use useState for
@@ -39,10 +40,10 @@ const Search = ({ setIsLoading, setSearchResults }) => {
    * Make sure to console.error on caught errors from the API methods.
    */
   useEffect(() => {
-    Promise.all([fetchAllCenturies, fetchAllClassifications])
-    .then(values => {
-      setCenturyList = values[0];
-      setClassificationList = values[1];
+    Promise.all([fetchAllCenturies(), fetchAllClassifications()])
+    .then(([century, classification]) => {
+      setCenturyList(century);
+      setClassificationList(classification);
     })
     .catch(error => {
       console.error(error.message)
