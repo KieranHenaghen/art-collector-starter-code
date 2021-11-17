@@ -37,19 +37,19 @@ const Searchable = (props) => {
   <span className="content">
       <a href="#" onClick={async (event) => {
           event.preventDefault();
-          setIsLoading() = true;
+          setIsLoading(true);
           try {
               const result = await fetchQueryResultsFromTermAndValue(searchTerm, searchValue);
-              setSearchResults() = result;
+              setSearchResults(result);
           }
           catch (error) {
               console.error(error.message);
           }
           finally {
-              setIsLoading() = false;
+              setIsLoading(false);
           }
       }}>
-          SOME SEARCH TERM
+          { searchValue }
       </a>
   </span>
 }
@@ -90,7 +90,100 @@ const Searchable = (props) => {
 //  */
 const Feature = (props) => {
     const { featuredResult } = props;
-    const { title, dated, images, primaryimageurl, description, culture, style, technique, medium, dimensions, people, department, division, contact, creditline } 
+    const {title, dated, images, primaryimageurl, description, culture, style, technique, medium, dimensions, people, department, division, contact, creditline} = featuredResult;
+    if (!featuredResult) {
+        return <main id="feature"></main>
+    }
+    return <main id="feature">
+        <div className="object-feature">
+            <header>
+                <h3>{ title }</h3>
+                <h4>{ dated }</h4>
+            </header>
+            <section className="facts">
+                { description 
+                ? <React.Fragment>
+                    <span className="title">{ description.name }</span>
+                    <span className="content">{ description.value }</span>
+                  </React.Fragment> 
+                : null
+                }
+                { culture 
+                ? <React.Fragment>
+                    <span className="title">{ culture.name }</span>
+                    <span className="content">{ culture.value }</span>
+                  </React.Fragment> 
+                : null
+                }
+                { style 
+                ? <React.Fragment>
+                    <span className="title">{ style.name }</span>
+                    <span className="content">{ style.value }</span>
+                  </React.Fragment>
+                : null
+                }
+                { technique
+                ? <React.Fragment>
+                    <span className="title">{ technique.name }</span>
+                    <span className="content">{ technique.value }</span>
+                  </React.Fragment>
+                : null
+                }
+                { medium
+                ? <React.Fragment>
+                    <span className="title">{ medium.name }</span>
+                    <span className="content">{ medium.value }</span>
+                  </React.Fragment>
+                : null
+                }
+                { dimensions
+                ? <React.Fragment>
+                    <span className="title">{ dimensions.name }</span>
+                    <span className="content">{ dimensions.value }</span>
+                  </React.Fragment>
+                : null
+                }
+                { people
+                ? <React.Fragment>
+                    <span className="title">{ people.name }</span>
+                    <span className="content">{ people.value }</span>
+                  </React.Fragment>
+                : null
+                }
+                { department
+                ? <React.Fragment>
+                    <span className="title">{ dimensions.name }</span>
+                    <span className="content">{ dimensions.value }</span>
+                  </React.Fragment>
+                : null
+                }
+                { division
+                ? <React.Fragment>
+                    <span className="title">{ division.name }</span>
+                    <span className="content">{ division.value }</span>
+                  </React.Fragment>
+                : null
+                }
+                { contact
+                ? <React.Fragment>
+                    <span className="title">{ contact.name }</span>
+                    <span className="content">{ contact.value }</span>
+                </React.Fragment>
+                : null
+                }
+                { creditline
+                ? <React.Fragment>
+                    <span className="title">{ creditline.name }</span>
+                    <span className="content">{ creditline.value }</span>
+                  </React.Fragment>
+                : null
+                }
+            </section>
+            <section className="photos">
+                <img src={ primaryimageurl } alt={  } />
+            </section>
+        </div>
+    </main>
 
 }
 
