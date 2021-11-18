@@ -34,7 +34,7 @@ import { fetchQueryResultsFromTermAndValue } from "../api";
 const Searchable = (props) => {
   const { searchTerm, searchValue, setIsLoading, setSearchResults } = props;
 
-  <span className="content">
+  return <span className="content">
       <a href="#" onClick={async (event) => {
           event.preventDefault();
           setIsLoading(true);
@@ -90,10 +90,26 @@ const Searchable = (props) => {
 //  */
 const Feature = (props) => {
     const { featuredResult } = props;
-    const {title, dated, images, primaryimageurl, description, culture, style, technique, medium, dimensions, people, department, division, contact, creditline} = featuredResult;
     if (!featuredResult) {
         return <main id="feature"></main>
     }
+    const { 
+        title, 
+        dated, 
+        images, 
+        primaryimageurl, 
+        description, 
+        culture, 
+        style, 
+        technique, 
+        medium, 
+        dimensions, 
+        people, 
+        department, 
+        division, 
+        contact, 
+        creditline } = featuredResult;
+
     return <main id="feature">
         <div className="object-feature">
             <header>
@@ -103,84 +119,95 @@ const Feature = (props) => {
             <section className="facts">
                 { description 
                 ? <React.Fragment>
-                    <span className="title">{ description.name }</span>
-                    <span className="content">{ description.value }</span>
+                    <span className="title">Description</span>
+                    <span className="content">{ description }</span>
                   </React.Fragment> 
                 : null
                 }
                 { culture 
                 ? <React.Fragment>
-                    <span className="title">{ culture.name }</span>
-                    <span className="content">{ culture.value }</span>
+                    <span className="title">Culture</span>
+                    <Searchable searchTerm="culture" searchValue={ culture } { ...props } />
                   </React.Fragment> 
                 : null
                 }
                 { style 
                 ? <React.Fragment>
-                    <span className="title">{ style.name }</span>
-                    <span className="content">{ style.value }</span>
+                    <span className="title">Style</span>
+                    <span className="content">{ style }</span>
                   </React.Fragment>
                 : null
                 }
                 { technique
                 ? <React.Fragment>
-                    <span className="title">{ technique.name }</span>
-                    <span className="content">{ technique.value }</span>
+                    <span className="title">Technique</span>
+                    <Searchable searchTerm="technique" searchValue={ technique } { ...props } />
                   </React.Fragment>
                 : null
                 }
                 { medium
                 ? <React.Fragment>
-                    <span className="title">{ medium.name }</span>
-                    <span className="content">{ medium.value }</span>
+                    <span className="title">Medium</span>
+                    <Searchable searchTerm="medium" searchValue={ medium } { ...props } />
                   </React.Fragment>
                 : null
                 }
                 { dimensions
                 ? <React.Fragment>
-                    <span className="title">{ dimensions.name }</span>
-                    <span className="content">{ dimensions.value }</span>
+                    <span className="title">Dimensions</span>
+                    <span className="content">{ dimensions }</span>
                   </React.Fragment>
                 : null
                 }
                 { people
-                ? <React.Fragment>
-                    <span className="title">{ people.name }</span>
-                    <span className="content">{ people.value }</span>
-                  </React.Fragment>
+                ? people.map(person => 
+                    <React.Fragment key={person.displayname}>
+                        <span className="title">People</span>
+                        <Searchable searchTerm="person" searchValue={ person.displayname } { ...props } />
+                    </React.Fragment>
+                )
+                
                 : null
                 }
                 { department
                 ? <React.Fragment>
-                    <span className="title">{ dimensions.name }</span>
-                    <span className="content">{ dimensions.value }</span>
+                    <span className="title">Department</span>
+                    <span className="content">{ department }</span>
                   </React.Fragment>
                 : null
                 }
                 { division
                 ? <React.Fragment>
-                    <span className="title">{ division.name }</span>
-                    <span className="content">{ division.value }</span>
+                    <span className="title">Division</span>
+                    <span className="content">{ division }</span>
                   </React.Fragment>
                 : null
                 }
                 { contact
                 ? <React.Fragment>
-                    <span className="title">{ contact.name }</span>
-                    <span className="content">{ contact.value }</span>
+                    <span className="title">Contact</span>
+                    <span className="content">{ contact }</span>
                 </React.Fragment>
                 : null
                 }
                 { creditline
                 ? <React.Fragment>
-                    <span className="title">{ creditline.name }</span>
-                    <span className="content">{ creditline.value }</span>
+                    <span className="title">Creditline</span>
+                    <span className="content">{ creditline }</span>
                   </React.Fragment>
                 : null
                 }
             </section>
             <section className="photos">
-                <img src={ primaryimageurl } alt={  } />
+                {
+                    (images && images.length > 0)
+                    ? images.map(image =>
+                        <img key={ image.baseimageurl } src={ image.baseimageurl } alt={ image.baseimageurl } />
+                        )
+                    : primaryimageurl
+                    ? <img src={ primaryimageurl } alt={ primaryimageurl } />
+                    : null
+                }
             </section>
         </div>
     </main>
